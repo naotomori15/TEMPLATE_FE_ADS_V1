@@ -31,7 +31,7 @@ export default function Footer() {
               </div>
               <hr className='mt-8 mb-4 border border-slate-500' />
               <p className='text-center font-light text-slate-200 text-base'>
-                ShoesX {year} © . All Right Reversed
+                {item?.title} {year} © . All Right Reversed
               </p>
             </div>
           ))}
