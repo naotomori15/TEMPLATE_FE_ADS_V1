@@ -11,8 +11,16 @@ function Loading() {
 }
 export default function Hero() {
   const { data, isLoading, isError } = useData('hero');
+  const { data: themeData } = useData('theme');
+  console.log(themeData);
+  const [themeOne, setThemeOne] = useState('');
+  const [themeTwo, setThemeTwo] = useState('');
   const [windowWidth, setWindoWidth] = useState(null);
   useEffect(() => {
+    themeData?.map((item) => {
+      setThemeOne(item.firstColor);
+      setThemeTwo(item.secondColor);
+    });
     const handleWindowResize = () => {
       setWindoWidth(window.innerWidth);
     };
@@ -22,10 +30,19 @@ export default function Hero() {
     return () => {
       window.removeEventListener('resize', handleWindowResize);
     };
-  }, []);
+  }, [themeData]);
+  console.log(themeData);
 
   return (
-    <section className='w-full h-full overflow-hidden px-6 py-20  md:px-24 md:py-32 bg-gradient-to-br from-[#FD8451] to-[#FFBD6F]'>
+    <section
+      className={`w-full h-full overflow-hidden px-6 py-20  md:px-24 md:py-32 ${
+        themeData?.length > 0
+          ? ''
+          : 'bg-gradient-to-br from-[#FD8451] to-[#FFBD6F]'
+      }`}
+      style={{
+        background: `linear-gradient(to bottom right, ${themeOne}, ${themeTwo})`,
+      }}>
       <div className='mx-auto container'>
         {isLoading ? (
           <Loading />

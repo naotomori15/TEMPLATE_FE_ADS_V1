@@ -11,6 +11,7 @@ export default function Home() {
   const [windowWidth, setWindoWidth] = useState(null);
   const [isGambling, setIsGambling] = useState(null);
   const gamblingData = data?.map(({ isGambling }) => isGambling);
+
   useEffect(() => {
     setWindoWidth(window.screen.width);
     if (data?.length > 0) {
@@ -25,7 +26,7 @@ export default function Home() {
       window.removeEventListener('resize', handleWindowResize);
     };
   }, [gamblingData, data?.length]);
-  console.log(windowWidth);
+
   return (
     <>
       <Head>
